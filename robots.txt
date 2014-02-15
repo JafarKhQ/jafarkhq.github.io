@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://JafarKhQ.github.io/sitemap.xml 
