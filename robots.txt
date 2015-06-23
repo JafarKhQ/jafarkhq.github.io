@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: 
+Disallow:
 
-Sitemap: http://jafarkhq.github.io/sitemap.xml 
+Sitemap: http://jafarkhq.github.io/sitemap.xml
