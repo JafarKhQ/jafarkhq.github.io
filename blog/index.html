@@ -9,13 +9,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>My Octopress Blog</title>
-        <meta name="author" content="Your Name">
+        <title>Memory Leak</title>
+        <meta name="author" content="Jafar Qaddoumi">
         
-        <meta name="description" content=" ">
+        <meta name="description" content="Android, Java, Python and more">
         
         <meta name="viewport" content="width=device-width">
-        <link rel="canonical" href="http://jafarkhq.github.io/blog">
+        <link rel="canonical" href="http://memleak.me/blog">
 
         <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic' rel='stylesheet' type='text/css'>
         <link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet" type="text/css">
@@ -23,7 +23,7 @@
         
         <link href="/favicon.png" rel="icon">
         <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
-        <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+        <link href="/atom.xml" rel="alternate" title="Memory Leak" type="application/atom+xml">
     </head>
 
 
@@ -32,7 +32,8 @@
         <header id="header">
     <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-4">
-        <a href="/" class="site-title">My Octopress Blog</a>
+        <a href="/" class="site-title">Memory Leak</a>
+        <div class="site-subtitle">malloc, realloc and free()</div>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-8">
         <nav>
@@ -41,6 +42,7 @@
     <ul class="menu">
     <li><a href="/">Home</a></li>
     <li><a href="/blog/">Blog</a></li>
+    <li><a href="/cv.html/">C.V.</a></li>
 </ul>
 
 </nav>
@@ -91,26 +93,6 @@
                     <div class="row">
 
     
-        <section class="hire--aside col-xs-12 col-sm-10 col-md-12">
-            
-    
-
-
-
-    
-
-
-
-
-<div class="hire hire--available">
-    <a class="hire__link" href="mailto:?subject=New%20job%20opportunity">
-        Available for new opportunities
-    </a>
-</div>
-
-
-        </section>
-    
 
     
 <section class="social col-xs-12 col-sm-6 col-md-12">
@@ -122,15 +104,15 @@
         
         
         
+        <li><a class="github" href="//github.com/JafarKhQ"><i class="fa fa-github"></i> Github</a></li>
+        <li><a class="googleplus" href="//plus.google.com/108808304272342276018"><i class="fa fa-google-plus-square"></i> Google+</a></li>
         
         
+        <li><a class="linkedin" href="//linkedin.com/in/JafarKhQ"><i class="fa fa-linkedin-square"></i> LinkedIn</a></li>
         
         
-        
-        
-        
-        
-        
+        <li><a class="stackoverflow" href="//stackoverflow.com/users/1124691"><i class="fa fa-stack-overflow"></i> StackOverflow</a></li>
+        <li><a class="twitter" href="//twitter.com/JafarKhQ"><i class="fa fa-twitter"></i> Twitter</a></li>
         
     </ul>
 </section>
@@ -141,6 +123,24 @@
     <h1>Recent Posts</h1>
     <ul class="divided">
         
+    </ul>
+</section>
+
+<section id="github-repos" class="col-xs-12 col-sm-6 col-md-12">
+    <h1>
+        GitHub Repos
+        
+        <small class="pull-right">
+            <a class="btn" href="//github.com/JafarKhQ" title="@JafarKhQ on GitHub" target="_blank">
+                <i class="fa fa-external-link"></i>
+            </a>
+        </small>
+        
+    </h1>
+    <ul id="gh_repos" class="divided">
+        <li class="loading">
+            <i class="fa fa-spinner fa-spin"></i>
+        </li>
     </ul>
 </section>
 
@@ -167,14 +167,33 @@
 <footer class="footer">
     <div class="row middle-xs">
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <p class="footer__copyright">
-    All content copyright Your Name.<br>
-    Code under <a href="//github.com/coogie/oscailte/blob/master/README.md">MIT Licence</a>.
+    All content copyright Jafar Qaddoumi.<br>
+    Powered by <a href="//octopress.org">Octopress</a>.
 </p>
-
         </div>
         
+        
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div>
+    
+
+
+
+    
+
+
+
+
+<div class="hire hire--available hire--vibrant">
+    <a class="hire__link" href="https://linkedin.com/in/jafarkhq">
+        Available for new opportunities
+    </a>
+</div>
+
+</div>
+        </div>
         
     </div>
 </footer>
@@ -187,9 +206,42 @@
 
 
 
+<script>
+    var disqus_shortname = 'memleak';
+    
+        
+        var disqus_script = 'count.js';
+    
+    (function () {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
 
+
+
+<script>
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'JafarKhQ',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+</script>
+<script src="/javascripts/github.js"></script>
 
 
 

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: http://jafarkhq.github.io/sitemap.xml
+Sitemap: http://memleak.me/sitemap.xml

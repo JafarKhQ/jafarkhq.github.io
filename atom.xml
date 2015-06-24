@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-    <title><![CDATA[My Octopress Blog]]></title>
-    <link href="http://jafarkhq.github.io/atom.xml" rel="self"/>
-    <link href="http://jafarkhq.github.io/"/>
-    <updated>2015-06-23T17:22:10+02:00</updated>
-    <id>http://jafarkhq.github.io/</id>
+    <title><![CDATA[Memory Leak]]></title>
+    <link href="http://memleak.me/atom.xml" rel="self"/>
+    <link href="http://memleak.me/"/>
+    <updated>2015-06-24T17:36:39+02:00</updated>
+    <id>http://memleak.me/</id>
     <author>
-        <name><![CDATA[Your Name]]></name>
+        <name><![CDATA[Jafar Qaddoumi]]></name>
         
     </author>
     <generator uri="http://octopress.org/">Octopress</generator>
