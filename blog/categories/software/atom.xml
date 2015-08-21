@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-    <title><![CDATA[Memory Leak]]></title>
-    <link href="http://memleak.me/atom.xml" rel="self"/>
+    <title><![CDATA[Category: software | Memory Leak]]></title>
+    <link href="http://memleak.me/blog/categories/software/atom.xml" rel="self"/>
     <link href="http://memleak.me/"/>
     <updated>2015-08-21T17:44:42+02:00</updated>
     <id>http://memleak.me/</id>
     <author>
         <name><![CDATA[Jafar Qaddoumi]]></name>
         
-    </author>
+      </author>
     <generator uri="http://octopress.org/">Octopress</generator>
 
     

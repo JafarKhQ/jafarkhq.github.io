@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://memleak.me/blog/2015/08/21/install-icescrum/</loc>
+    <lastmod>2015-08-21T15:57:37+02:00</lastmod>
+  </url>
+  <url>
     <loc>http://memleak.me/cv.html</loc>
   </url>
   <url>
@@ -11,6 +15,12 @@
   </url>
   <url>
     <loc>http://memleak.me/</loc>
+  </url>
+  <url>
+    <loc>http://memleak.me/blog/categories/software/</loc>
+  </url>
+  <url>
+    <loc>http://memleak.me/blog/categories/guide/</loc>
   </url>
   <url>
     <loc>http://memleak.me/googled22369132bea44a9.html</loc>
