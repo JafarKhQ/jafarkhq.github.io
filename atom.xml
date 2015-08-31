@@ -4,7 +4,7 @@
     <title><![CDATA[Memory Leak]]></title>
     <link href="http://memleak.me/atom.xml" rel="self"/>
     <link href="http://memleak.me/"/>
-    <updated>2015-08-21T17:44:42+02:00</updated>
+    <updated>2015-08-31T14:16:44+02:00</updated>
     <id>http://memleak.me/</id>
     <author>
         <name><![CDATA[Jafar Qaddoumi]]></name>
@@ -18,45 +18,87 @@
         <link href="http://memleak.me/blog/2015/08/21/install-icescrum/"/>
         <updated>2015-08-21T15:57:37+02:00</updated>
         <id>http://memleak.me/blog/2015/08/21/install-icescrum</id>
-        <content type="html"><![CDATA[<p>How to install Icescrum, Tomcat and PostgreSQL on Ubuntu/Debian Server</p>
+        <content type="html"><![CDATA[<p>Icescrum com&rsquo;s with two installer options:<br/>
+1. icescrum.jar: Include iceScrum and a preconfigured Tomcat server.<br/>
+2. icescrum.war: Include iceScrum web app only.</p>
+
+<p>In this guide we will learn how to install and configer <strong>icescrum.war</strong> with <strong>Tomcat</strong> and <strong>PostgreSQL</strong> on <strong>Ubuntu/Debian</strong> Server.</p>
+
+<p><br/></p>
 
 <!-- more -->
+
+
 
 
 <h2 class="title--indent">Requirement</h2>
 
 
-<p>For &lsquo;iceScrum R6#14.3&rsquo; we need<br/>
-- Java 6 or 7. (Java 8 not supported)<br/>
-- Tomcat 6 or 7. (Tomcat 8 not supported)</p>
+<p><strong>iceScrum R6#14.3</strong> require:<br/>
+ - Java 7. (Java 8 not supported)<br/>
+ - Tomcat 7. (Tomcat 8 not supported)</p>
 
 <h2 class="title--indent">Tomcat 7</h2>
 
 
 <h3>Install</h3>
 
-<p>If not installed you can install Tomcat using:<br/>
-    $ sudo apt-get install tomcat7 tomcat7-common</p>
+<p>To install Tomcat 7:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install tomcat7 tomcat7-docs tomcat7-admin tomcat7-examples
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Confige</h3>
 
 <ol>
-<li><p>Add &lsquo;CATALINA_OPTS&rsquo; by craeting the &lsquo;setenv.sh&rsquo; file<br/>
- $ sudo nano /usr/share/tomcat7/bin/setenv.sh<br/>
-Paste this option in the file<br/>
- CATALINA_OPTS=&ldquo;-XX:MaxPermSize=512m -Xmx1024m&rdquo;
- CATALINA_OPTS=&ldquo;$CATALINA_OPTS -Dicescrum_config_location=/etc/tomcat7/icescrum.groovy&rdquo;
- CATALINA_OPTS=&ldquo;$CATALINA_OPTS -Duser.timezone=UTC&rdquo;
- #CATALINA_OPTS=&ldquo;$CATALINA_OPTS -Dicescrum.log.dir=/var/lib/tomcat7/icescrum/&rdquo;</p></li>
-<li><p>Change &lsquo;server.xml&rsquo; file<br/>
-Open &lsquo;server.xml&rsquo; file<br/>
- $ sudo nano /etc/tomcat7/server.xml<br/>
-Search for &lsquo;<Connector port="8080"' comit it and use this one
- <Connector port="8080" protocol="org.apache.coyote.http11.Http11NioProtocol" connectionTimeout="2000" maxThreads="500" URIEncoding="UTF-8"/></p></li>
+<li><p>Add <em>CATALINA_OPTS</em> by craeting the <strong>setenv.sh</strong> file
+ <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo nano /usr/share/tomcat7/bin/setenv.sh
+</span></code></pre></td></tr></table></div></figure>
+ Then Copy/Paste those options to the file
+ <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='properties'><span class='line'><span class="na">CATALINA_OPTS</span><span class="o">=</span><span class="s">&quot;-XX:MaxPermSize=512m -Xmx1024m&quot;</span>
+</span><span class='line'><span class="na">CATALINA_OPTS</span><span class="o">=</span><span class="s">&quot;$CATALINA_OPTS -Dicescrum_config_location=/etc/tomcat7/icescrum.groovy&quot;</span>
+</span><span class='line'><span class="na">CATALINA_OPTS</span><span class="o">=</span><span class="s">&quot;$CATALINA_OPTS -Duser.timezone=UTC&quot;</span>
+</span><span class='line'><span class="c">#CATALINA_OPTS=&quot;$CATALINA_OPTS -Dicescrum.log.dir=/var/lib/tomcat7/icescrum/&quot;</span>
+</span></code></pre></td></tr></table></div></figure></p></li>
+<li><p>Config <em>server.xml</em> file<br/>
+ Open <strong>server.xml</strong> file
+ <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo nano /etc/tomcat7/server.xml
+</span></code></pre></td></tr></table></div></figure>
+ Search for <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">&quot;8080&quot;</span> <span class="err">&hellip;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure> comment it out and use instead
+ <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;Connector</span> <span class="na">port=</span><span class="s">&quot;8080&quot;</span>
+</span><span class='line'>  <span class="na">protocol=</span><span class="s">&quot;org.apache.coyote.http11.Http11NioProtocol&quot;</span>
+</span><span class='line'>  <span class="na">connectionTimeout=</span><span class="s">&quot;2000&quot;</span>
+</span><span class='line'>  <span class="na">maxThreads=</span><span class="s">&quot;500&quot;</span>
+</span><span class='line'>  <span class="na">URIEncoding=</span><span class="s">&quot;UTF-8&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p></li>
 </ol>
 
 
 <h2 class="title--indent">PostgreSQL</h2>
+
+
+<h3>Install</h3>
+
+<p>To install PostgreSQL</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo apt-get install postgresql postgresql-contrib
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>// TODO</p>
@@ -66,82 +108,153 @@ Search for &lsquo;<Connector port="8080"' comit it and use this one
 
 <h3>Download</h3>
 
-<p>Download icescrum.war file to &lsquo;/var/lib/tomcat7/webapps/&rsquo; directory from <a href="https://www.icescrum.com/pricing/#standalone">https://www.icescrum.com/pricing/#standalone</a><br/>
-    $ cd /var/lib/tomcat7/webapps/
-    $ sudo wget icescrum.war/direct/url</p>
+<p>Download <em>icescrum.war</em> file to <em>/var/lib/tomcat7/webapps/</em> directory from <a href="https://www.icescrum.com/pricing/#standalone">https://www.icescrum.com/pricing/#standalone</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /var/lib/tomcat7/webapps/
+</span><span class='line'><span class="nv">$ </span>sudo wget http://direct/url/to/icescrum.war
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Confige</h3>
 
-<p>Create &lsquo;icescrum.groovy&rsquo; file at &lsquo;/etc/tomcat7/&rsquo;<br/>
-    $ sudo nano /etc/tomcat7/icescrum.groovy
-Paste this configration<br/>
-    /Server URL - IMPORTANT
-    grails.serverURL = &ldquo;<a href="http://127.0.0.1:8080/icescrum">http://127.0.0.1:8080/icescrum</a>&rdquo;</p>
+<p>Create <strong>icescrum.groovy</strong> file at <strong>/etc/tomcat7/</strong></p>
 
-<pre><code>//Logging (for debug purposes)
-icescrum.debug.enable = true
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo nano /etc/tomcat7/icescrum.groovy
+</span></code></pre></td></tr></table></div></figure>
 
-//Working directory
-//icescrum.baseDir = "/var/lib/tomcat7/icescrum/"
 
-//PostgreSQL
-dataSource.driverClassName = "org.postgresql.Driver"
-dataSource.dialect="net.sf.hibernate.dialect.PostgreSQLDialect"
-//dataSource.dialect="org.hibernate.dialect.PostgreSQLDialect"
-dataSource.url = "jdbc:postgresql://localhost:5432/icescrum"
-dataSource.username = "postgres"
-dataSource.password = "postgres"
+<p>Then Copy/Paste this configration (modifiy to fit your config)</p>
 
-//MySQL
-//dataSource.dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-//dataSource.driverClassName = "com.mysql.jdbc.Driver"
-//dataSource.url = "jdbc:mysql://localhost:3306/icescrum?useUnicode=true&amp;characterEncoding=utf8"
-//dataSource.username = "root"
-//dataSource.password = "password"
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+</pre></td><td class='code'><pre><code class='properties'><span class='line'><span class="c">//Server URL - IMPORTANT</span>
+</span><span class='line'><span class="na">grails.serverURL</span> <span class="o">=</span> <span class="s">&quot;http://127.0.0.1:8080/icescrum&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Logging (for debug purposes)</span>
+</span><span class='line'><span class="na">icescrum.debug.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Working directory</span>
+</span><span class='line'><span class="c">//icescrum.baseDir = &quot;/var/lib/tomcat7/icescrum/&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//PostgreSQL</span>
+</span><span class='line'><span class="na">dataSource.driverClassName</span> <span class="o">=</span> <span class="s">&quot;org.postgresql.Driver&quot;</span>
+</span><span class='line'><span class="na">dataSource.dialect</span><span class="o">=</span><span class="s">&quot;net.sf.hibernate.dialect.PostgreSQLDialect&quot;</span>
+</span><span class='line'><span class="c">//dataSource.dialect=&quot;org.hibernate.dialect.PostgreSQLDialect&quot;</span>
+</span><span class='line'><span class="na">dataSource.url</span> <span class="o">=</span> <span class="s">&quot;jdbc:postgresql://localhost:5432/icescrum&quot;</span>
+</span><span class='line'><span class="na">dataSource.username</span> <span class="o">=</span> <span class="s">&quot;postgres&quot;</span>
+</span><span class='line'><span class="na">dataSource.password</span> <span class="o">=</span> <span class="s">&quot;postgres&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//MySQL</span>
+</span><span class='line'><span class="c">//dataSource.dialect = &quot;org.hibernate.dialect.MySQL5InnoDBDialect&quot;</span>
+</span><span class='line'><span class="c">//dataSource.driverClassName = &quot;com.mysql.jdbc.Driver&quot;</span>
+</span><span class='line'><span class="c">//dataSource.url = &quot;jdbc:mysql://localhost:3306/icescrum?useUnicode=true&amp;characterEncoding=utf8&quot;</span>
+</span><span class='line'><span class="c">//dataSource.username = &quot;root&quot;</span>
+</span><span class='line'><span class="c">//dataSource.password = &quot;password&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Mail server (These exemple values aren&#39;t set by default)</span>
+</span><span class='line'><span class="c">//grails.mail.host = &quot;smtp.gmail.com&quot;</span>
+</span><span class='line'><span class="c">//grails.mail.port = 465</span>
+</span><span class='line'><span class="c">//grails.mail.username = &quot;identifiant@gmail.com&quot;</span>
+</span><span class='line'><span class="c">//grails.mail.password = &quot;password&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Project</span>
+</span><span class='line'><span class="na">icescrum.project.import.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.project.export.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.project.creation.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.project.private.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Users</span>
+</span><span class='line'><span class="na">icescrum.gravatar.secure</span> <span class="o">=</span> <span class="s">false</span>
+</span><span class='line'><span class="na">icescrum.gravatar.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.registration.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.login.retrieve.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Alerts</span>
+</span><span class='line'><span class="na">icescrum.auto_follow_productowner</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.auto_follow_stakeholder</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.auto_follow_scrummaster</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.alerts.errors.to</span> <span class="o">=</span> <span class="s">&quot;quentin@dufour.tk&quot;</span>
+</span><span class='line'><span class="na">icescrum.alerts.subject_prefix</span> <span class="o">=</span> <span class="s">&quot;[icescrum]&quot;</span>
+</span><span class='line'><span class="na">icescrum.alerts.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span><span class='line'><span class="na">icescrum.alerts.default.from</span> <span class="o">=</span> <span class="s">&quot;mrsuperboum@gmail.com&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">//Attachments</span>
+</span><span class='line'><span class="na">icescrum.attachments.enable</span> <span class="o">=</span> <span class="s">true</span>
+</span></code></pre></td></tr></table></div></figure>
 
-//Mail server (These exemple values aren't set by default)
-//grails.mail.host = "smtp.gmail.com"
-//grails.mail.port = 465
-//grails.mail.username = "identifiant@gmail.com"
-//grails.mail.password = "password"
 
-//Project
-icescrum.project.import.enable = true
-icescrum.project.export.enable = true
-icescrum.project.creation.enable = true
-icescrum.project.private.enable = true
 
-//Users
-icescrum.gravatar.secure = false
-icescrum.gravatar.enable = true
-icescrum.registration.enable = true
-icescrum.login.retrieve.enable = true
-
-//Alerts
-icescrum.auto_follow_productowner = true
-icescrum.auto_follow_stakeholder = true
-icescrum.auto_follow_scrummaster = true
-icescrum.alerts.errors.to = "quentin@dufour.tk"
-icescrum.alerts.subject_prefix = "[icescrum]"
-icescrum.alerts.enable = true
-icescrum.alerts.default.from = "mrsuperboum@gmail.com"
-
-//Attachments
-icescrum.attachments.enable = true
-</code></pre>
 
 <h2 class="title--indent">Running</h2>
 
 
 <ol>
 <li>Start or Restart tomcat server<br/>
- $ sudo service tomcat7 start/restart</li>
-<li>Open Tomcat manager web app (your.server.ip.address:8080/manager)<br/>
-Under Applications make sure /icescrum is running, if not click start to run it.</li>
-<li>Open icescrum home page (your.server.ip.address:8080/icescrum)<br/>
+ <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>sudo service tomcat7 stop
+</span><span class='line'><span class="nv">$ </span>sudo service tomcat7 start
+</span></code></pre></td></tr></table></div></figure></li>
+<li>Open Tomcat manager web app <strong>your.server.ip.address:8080/manager</strong><br/>
+Under <strong>Applications</strong> make sure <strong>/icescrum</strong> is running, if not click <strong>Start</strong> to run it.</li>
+<li>Open icescrum home page <strong>your.server.ip.address:8080/icescrum</strong><br/>
 It will redirect you to setup wizard.</li>
 <li>Follow the setup wizard and check your configuration</li>
-<li>After finish the setup wizard restart tomcat</li>
+<li>After finish the setup wizard restart <strong>tomcat</strong></li>
 <li>Done.</li>
 </ol>
 
